@@ -1,0 +1,44 @@
+{
+  "name": "com.rasoi-sutra.app",
+  "version": "1.0.0",
+  "description": "a backend project for a rasoi sutra",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
+  },
+  "keywords": [
+    "khana",
+    "khazana",
+    "salt",
+    "diet"
+  ],
+  "author": "Akash Samanta",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.11.0",
+    "bcrypt": "^6.0.0",
+    "body-parser": "^2.2.0",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "crypto-js": "^4.2.0",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "morgan": "^1.10.1",
+    "mysql2": "^3.14.3",
+    "nanoid": "^5.1.5",
+    "node-cache": "^5.1.2",
+    "prettier": "^3.6.2",
+    "reflect-metadata": "^0.2.2",
+    "typeorm": "^0.3.25",
+    "winston": "^3.17.0",
+    "winston-daily-rotate-file": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/multer": "^1.4.12",
+    "nodemon": "^3.1.4"
+  }
+}
