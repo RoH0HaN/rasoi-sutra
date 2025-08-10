@@ -13,7 +13,7 @@ const RecipeRating = new EntitySchema({
       type: "int",
     },
     recipe_id: {
-      type: "int",
+      type: "varchar", // ID from Spoonacular
     },
     rating: {
       type: "int",
@@ -33,14 +33,6 @@ const RecipeRating = new EntitySchema({
       target: "User",
       inverseSide: "recipeRatings", // matches User.recipeRatings
       joinColumn: { name: "user_id" },
-      onDelete: "CASCADE",
-      onUpdate: "CASCADE",
-    },
-    recipe: {
-      type: "many-to-one",
-      target: "Recipe",
-      inverseSide: "ratings", // matches Recipe.ratings
-      joinColumn: { name: "recipe_id" },
       onDelete: "CASCADE",
       onUpdate: "CASCADE",
     },

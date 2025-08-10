@@ -43,12 +43,6 @@ const Ingredient = new EntitySchema({
       inverseSide: "ingredient", // matches UserIngredientPreference.ingredient
       cascade: true,
     },
-    recipeIngredients: {
-      type: "one-to-many",
-      target: "RecipeIngredient",
-      inverseSide: "ingredient", // matches RecipeIngredient.ingredient
-      cascade: true,
-    },
   },
 });
 

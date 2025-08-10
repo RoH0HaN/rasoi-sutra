@@ -1,21 +1,32 @@
 import { Router } from "express";
 import {
-  getRecipes,
-  getRecipeDetails,
-} from "../controllers/recipe.controller.js";
+  addRating,
+  deleteRating,
+  getAllRatingsOfRecipe,
+} from "../controllers/recipe.rating.controller.js";
 import { verifyJWT } from "../middlewares/auth.middleware.js";
 import { authorizeAccessPermissions } from "../middlewares/access.middleware.js";
 import { Role } from "../entities/user.js";
 
 const router = Router();
 
-router.get("/", verifyJWT, authorizeAccessPermissions(Role.USER), getRecipes);
-
-router.get(
-  "recipe-details/:id",
+router.post(
+  "add/:id",
   verifyJWT,
   authorizeAccessPermissions(Role.USER),
-  getRecipeDetails,
+  addRating,
+);
+router.get(
+  "get/:id",
+  verifyJWT,
+  authorizeAccessPermissions(Role.USER),
+  getAllRatingsOfRecipe,
+);
+router.delete(
+  "delete/:id",
+  verifyJWT,
+  authorizeAccessPermissions(Role.USER),
+  deleteRating,
 );
 
 export default router;

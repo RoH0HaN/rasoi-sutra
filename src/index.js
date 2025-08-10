@@ -21,6 +21,7 @@ DB.initialize()
   })
   .catch((error) => {
     consoleLogger.error("MySQL connection error | Error: ", error);
+    process.exit(1);
   });
 
 app.all("/", (_, res) => {

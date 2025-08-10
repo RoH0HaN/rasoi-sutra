@@ -13,7 +13,7 @@ const UserSavedRecipe = new EntitySchema({
       type: "int",
     },
     recipe_id: {
-      type: "int",
+      type: "varchar", // ID from Spoonacular
     },
     saved_at: {
       type: "timestamp",
@@ -26,14 +26,6 @@ const UserSavedRecipe = new EntitySchema({
       target: "User",
       inverseSide: "savedRecipes", // matches User.savedRecipes
       joinColumn: { name: "user_id" },
-      onDelete: "CASCADE",
-      onUpdate: "CASCADE",
-    },
-    recipe: {
-      type: "many-to-one",
-      target: "Recipe",
-      inverseSide: "savedByUsers", // matches Recipe.savedByUsers
-      joinColumn: { name: "recipe_id" },
       onDelete: "CASCADE",
       onUpdate: "CASCADE",
     },

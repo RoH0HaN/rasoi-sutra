@@ -1,14 +1,8 @@
 import { asyncHandler } from "../utils/async.handler.js";
 import { validateFields } from "../utils/validate.fields.js";
-import { User, ALLOWED_DIET, ALLOWED_SKILL } from "../entities/user.js";
-import {
-  userRepo,
-  userProfileRepo,
-  ingredientRepo,
-} from "../config/repositories.js";
+import { ingredientRepo } from "../config/repositories.js";
 import { ApiRes } from "../utils/api.response.js";
 import { ALLOWED_CATEGORY } from "../entities/ingredient.js";
-import { Role } from "../entities/user.js";
 import {
   findIngredientById,
   findIngredientByName,

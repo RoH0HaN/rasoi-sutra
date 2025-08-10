@@ -1,8 +1,7 @@
 import { asyncHandler } from "../utils/async.handler.js";
 import { validateFields } from "../utils/validate.fields.js";
-import { User, ALLOWED_DIET, ALLOWED_SKILL } from "../entities/user.js";
+import { ALLOWED_DIET, ALLOWED_SKILL } from "../entities/user.js";
 import {
-  userRepo,
   userProfileRepo,
   userIngredientPreferenceRepo,
 } from "../config/repositories.js";

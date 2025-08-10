@@ -1,8 +1,5 @@
-import { ALLOWED_MEAL_TYPE, Recipe } from "../entities/recipe.js";
-import { recipeRepo } from "../config/repositories.js"; // Your TypeORM repo for Recipe entity
 import { asyncHandler } from "../utils/async.handler.js";
-import { setCache, getCache, hasCache } from "../config/cache.js"; // your node-cache wrapper
-import axios from "axios";
+import { setCache, getCache, hasCache } from "../config/cache.js";
 import { ApiRes } from "../utils/api.response.js";
 import { ALLOWED_DIET } from "../entities/user.js";
 import { spoonacularRequest } from "../utils/helpers/spoonacular.helper.js";
@@ -18,7 +15,10 @@ const getRecipes = asyncHandler(async (req, res) => {
     limit,
   } = req.query;
 
-  if (mealType && !ALLOWED_MEAL_TYPE.includes(mealType)) {
+  if (
+    mealType &&
+    !["breakfast", "lunch", "dinner", "snack", "teatime"].includes(mealType)
+  ) {
     return res.status(400).json(new ApiRes(400, null, "Invalid meal type."));
   }
 
@@ -87,4 +87,40 @@ const getRecipes = asyncHandler(async (req, res) => {
     .json(new ApiRes(200, apiResults, "Recipes fetched from Spoonacular API."));
 });
 
-export { getRecipes };
+/**
+ * @param id - ID of the recipe
+ */
+const getRecipeDetails = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+
+  if (!id) {
+    return res.status(400).json(new ApiRes(400, null, "Missing recipe ID."));
+  }
+
+  const cacheKey = `recipe-details:${id}`;
+
+  if (hasCache(cacheKey)) {
+    const cached = getCache(cacheKey);
+    return res
+      .status(200)
+      .json(new ApiRes(200, cached, "Recipe details fetched from cache."));
+  }
+
+  const apiResults = await spoonacularRequest(`/recipes/${id}/information`, {
+    includeNutrition: true,
+  });
+
+  setCache(cacheKey, apiResults);
+
+  return res
+    .status(200)
+    .json(
+      new ApiRes(
+        200,
+        apiResults,
+        "Recipe details fetched from Spoonacular API.",
+      ),
+    );
+});
+
+export { getRecipes, getRecipeDetails };
